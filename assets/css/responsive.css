@@ -1,0 +1,145 @@
+/*
+  Breakpoints:
+    < 600px   mobile   (sidebar = off-canvas drawer, default in components.css)
+    >= 600px  tablet
+    >= 960px  desktop  (sidebar becomes a persistent column)
+    >= 1280px wide
+*/
+
+/* ---------------------------------------------------------------- */
+/* Mobile-only refinements (< 600px)                                 */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 599px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  .page-header {
+    padding-block: var(--space-md);
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Tablet and up (>= 600px)                                          */
+/* ---------------------------------------------------------------- */
+
+@media (min-width: 600px) {
+  .container {
+    padding-inline: var(--space-lg);
+  }
+
+  .level-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .institute-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Desktop and up (>= 960px): sidebar becomes a persistent column    */
+/* ---------------------------------------------------------------- */
+
+@media (min-width: 960px) {
+  .sidebar {
+    position: sticky;
+    top: 0;
+    left: auto;
+    align-self: flex-start;
+    height: 100vh;
+    width: var(--sidebar-width);
+    transform: none;
+    box-shadow: none;
+    flex-shrink: 0;
+    transition: width var(--transition-base);
+  }
+
+  .app-shell__overlay {
+    display: none;
+  }
+
+  .topbar__menu-btn,
+  .sidebar__close-btn {
+    display: none;
+  }
+
+  .sidebar__collapse-btn {
+    display: inline-flex;
+  }
+
+  /* Collapsed rail state, toggled by navigation.js */
+  .app-shell--collapsed .sidebar {
+    width: var(--sidebar-width-collapsed);
+  }
+
+  .app-shell--collapsed .sidebar__brand-text,
+  .app-shell--collapsed .sidebar__search,
+  .app-shell--collapsed .lang-switch,
+  .app-shell--collapsed .platonus-link__label,
+  .app-shell--collapsed .nav-list__label,
+  .app-shell--collapsed .nav-list__toggle,
+  .app-shell--collapsed .nav-list__submenu {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .app-shell--collapsed .sidebar__header {
+    justify-content: center;
+  }
+
+  .app-shell--collapsed .nav-list__row {
+    justify-content: center;
+  }
+
+  .app-shell--collapsed .nav-list__link {
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+
+  .app-shell--collapsed .platonus-link {
+    padding-inline: 0;
+  }
+
+  .campus-block {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Wide (>= 1280px)                                                   */
+/* ---------------------------------------------------------------- */
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: var(--space-xl);
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+}

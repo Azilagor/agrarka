@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новость — КазАТУ</title>
+  <meta name="description" content="Новость КазАТУ имени С. Сейфуллина.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body data-page="news">
+  <a class="skip-link" href="#main-content" data-i18n="skip.link">Перейти к содержимому</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Боковая панель">
+      <div id="sidebar-mount"></div>
+      <noscript>
+        <nav aria-label="Основная навигация">
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="admissions.html">Поступление</a></li>
+            <li><a href="education.html">Образование</a></li>
+            <li><a href="institutes.html">Институты</a></li>
+            <li><a href="science.html">Наука</a></li>
+            <li><a href="students.html">Студентам</a></li>
+            <li><a href="international.html">Международное сотрудничество</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="about.html">Об университете</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+      </noscript>
+    </aside>
+
+    <div class="app-shell__overlay" id="sidebarOverlay"></div>
+
+    <div class="app-shell__main">
+      <header class="topbar">
+        <button type="button" class="topbar__menu-btn" id="mobileMenuToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Открыть меню">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <ol>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li aria-current="page" id="newsBreadcrumbTitle">Новость</li>
+          </ol>
+        </nav>
+      </header>
+
+      <main id="main-content" class="app-shell__content">
+        <div id="newsDetail">
+          <header class="page-header">
+            <div class="container">
+              <span class="page-header__eyebrow" data-field="category">Новости</span>
+              <h1 data-field="title">Заголовок новости</h1>
+              <p><time data-field="date" datetime="">1 января 2026</time></p>
+            </div>
+          </header>
+
+          <section class="section">
+            <div class="container container--narrow">
+              <div id="newsDetailMedia" style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 24px;" hidden></div>
+              <div id="newsDetailBody" class="flow"></div>
+
+              <div style="margin-top: 32px;">
+                <h2 class="section__heading" style="font-size: 18px;">Поделиться</h2>
+                <div class="share-buttons" id="newsShare"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section section--surface" id="newsRelatedSection">
+            <div class="container">
+              <h2 class="section__heading">Похожие материалы</h2>
+              <div class="card-grid" id="newsRelated"></div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="container">
+              <a class="btn btn-outline" href="news.html">← Ко всем новостям</a>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <div id="footer-mount"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/news.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

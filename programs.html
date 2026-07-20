@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог образовательных программ — КазАТУ</title>
+  <meta name="description" content="Каталог образовательных программ КазАТУ: поиск и фильтры по уровню обучения, институту, языку преподавания и направлению подготовки.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body data-page="education">
+  <a class="skip-link" href="#main-content" data-i18n="skip.link">Перейти к содержимому</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Боковая панель">
+      <div id="sidebar-mount"></div>
+      <noscript>
+        <nav aria-label="Основная навигация">
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="admissions.html">Поступление</a></li>
+            <li><a href="education.html">Образование</a></li>
+            <li><a href="institutes.html">Институты</a></li>
+            <li><a href="science.html">Наука</a></li>
+            <li><a href="students.html">Студентам</a></li>
+            <li><a href="international.html">Международное сотрудничество</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="about.html">Об университете</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+      </noscript>
+    </aside>
+
+    <div class="app-shell__overlay" id="sidebarOverlay"></div>
+
+    <div class="app-shell__main">
+      <header class="topbar">
+        <button type="button" class="topbar__menu-btn" id="mobileMenuToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Открыть меню">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <ol>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="education.html">Образование</a></li>
+            <li aria-current="page">Образовательные программы</li>
+          </ol>
+        </nav>
+      </header>
+
+      <main id="main-content" class="app-shell__content">
+        <header class="page-header">
+          <div class="container">
+            <span class="page-header__eyebrow">Каталог программ</span>
+            <h1>Образовательные программы</h1>
+            <p>Найдите программу по названию или отфильтруйте каталог по уровню обучения, институту, языку и направлению подготовки.</p>
+          </div>
+        </header>
+
+        <section class="section">
+          <div class="container">
+            <p class="badge badge--warning">TODO: демонстрационный каталог из 23 программ по семи институтам — заменить на полный официальный перечень образовательных программ.</p>
+
+            <div class="form-field" style="max-width: 420px; margin-top: 16px;">
+              <label for="programSearch">Поиск по названию, институту, коду</label>
+              <input class="form-control" type="search" id="programSearch" placeholder="Например, «Агрономия»" autocomplete="off">
+            </div>
+
+            <div class="filter-tabs" id="programFilterTabs" role="group" aria-label="Фильтр по уровню обучения">
+              <button type="button" class="filter-tabs__btn" data-level="all" aria-pressed="true">Все уровни</button>
+              <button type="button" class="filter-tabs__btn" data-level="bachelor" aria-pressed="false">Бакалавриат</button>
+              <button type="button" class="filter-tabs__btn" data-level="master" aria-pressed="false">Магистратура</button>
+              <button type="button" class="filter-tabs__btn" data-level="doctorate" aria-pressed="false">Докторантура</button>
+            </div>
+
+            <div class="filter-grid">
+              <div class="form-field">
+                <label for="programInstitute">Институт</label>
+                <select class="form-control" id="programInstitute"></select>
+              </div>
+              <div class="form-field">
+                <label for="programLanguage">Язык обучения</label>
+                <select class="form-control" id="programLanguage"></select>
+              </div>
+              <div class="form-field">
+                <label for="programField">Направление</label>
+                <select class="form-control" id="programField"></select>
+              </div>
+            </div>
+
+            <div class="results-toolbar">
+              <p id="programResultsCount" role="status" aria-live="polite">Найдено программ: 23 из 23</p>
+              <button type="button" class="btn btn-secondary" id="programFilterReset">Сбросить фильтры</button>
+            </div>
+
+            <p id="programEmptyState" class="text-muted" hidden>По вашему запросу программы не найдены. Попробуйте изменить фильтры.</p>
+
+            <div class="card-grid" id="programResults" aria-live="polite"></div>
+          </div>
+        </section>
+      </main>
+
+      <div id="footer-mount"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/programs.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
