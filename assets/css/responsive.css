@@ -100,6 +100,14 @@
   .home-news__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .science-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .science-item:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 959px) {
@@ -113,6 +121,23 @@
 /* ---------------------------------------------------------------- */
 
 @media (min-width: 960px) {
+  .science-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .science-item {
+    grid-column: span 2;
+  }
+
+  .science-item--wide {
+    grid-column: span 3;
+    min-height: 196px;
+  }
+
+  .science-item:last-child {
+    grid-column: span 2;
+  }
+
   .sidebar {
     position: sticky;
     top: 0;
