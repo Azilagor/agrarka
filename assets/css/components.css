@@ -824,6 +824,8 @@ input:focus-visible,
 
 .hero--photo {
   position: relative;
+  min-height: calc(100vh - var(--topbar-height));
+  min-height: calc(100dvh - var(--topbar-height));
   background: var(--color-primary-dark);
   overflow: hidden;
   isolation: isolate;
