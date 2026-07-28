@@ -16,7 +16,6 @@
   'use strict';
 
   var NAV_ITEMS = [
-    { key: 'home', label: 'Главная', href: 'index.html' },
     {
       key: 'admissions',
       label: 'Поступление',
@@ -237,12 +236,15 @@
 
     var brand = document.createElement('a');
     brand.className = 'sidebar__brand';
+    if (currentPageKey() === 'home') {
+      brand.classList.add('is-active');
+      brand.setAttribute('aria-current', 'page');
+    }
     brand.href = 'index.html';
     brand.innerHTML =
-      '<img class="sidebar__logo" src="assets/icons/logo.svg" alt="Казахский агротехнический исследовательский университет имени С. Сейфуллина — на главную" width="40" height="40">' +
+      '<img class="sidebar__logo" src="assets/icons/logo.svg" alt="" width="40" height="40">' +
       '<span class="sidebar__brand-text">' +
-      '<span class="sidebar__brand-name">КазАТУ</span>' +
-      '<span class="sidebar__brand-full">им. С. Сейфуллина</span>' +
+      '<span class="sidebar__brand-name">Казахский агротехнический исследовательский университет имени С. Сейфуллина</span>' +
       '</span>';
 
     var closeBtn = document.createElement('button');
