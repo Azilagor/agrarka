@@ -47,50 +47,10 @@
 .sidebar__header {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--space-2xs);
   padding: var(--space-sm);
   border-bottom: 1px solid var(--color-border);
-}
-
-.sidebar__brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  flex: 1 1 auto;
-  min-width: 0;
-  color: var(--color-primary);
-  border-radius: var(--radius-sm);
-  padding: var(--space-3xs);
-}
-
-.sidebar__brand:hover {
-  color: var(--color-primary-hover);
-}
-
-.sidebar__brand.is-active {
-  background: var(--color-canvas);
-  box-shadow: var(--shadow-sm);
-}
-
-.sidebar__logo {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-.sidebar__brand-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-}
-
-.sidebar__brand-name {
-  font: 700 13px/1.3 var(--font-heading);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .sidebar__icon-btn {
@@ -426,6 +386,45 @@
   height: 24px;
 }
 
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-width: 0;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3xs);
+}
+
+.topbar__brand:hover {
+  color: var(--color-primary-hover);
+}
+
+.topbar__brand.is-active {
+  background: var(--color-surface-1);
+}
+
+.topbar__brand-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.topbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.topbar__brand-name {
+  font: 700 12px/1.25 var(--font-heading);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ---------------------------------------------------------------- */
 /* Hero (homepage)                                                   */
 /* ---------------------------------------------------------------- */
@@ -468,6 +467,13 @@
 /* ---------------------------------------------------------------- */
 /* Breadcrumbs                                                       */
 /* ---------------------------------------------------------------- */
+
+.breadcrumbs {
+  display: block;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-sm) var(--space-md) 0;
+}
 
 .breadcrumbs ol {
   display: flex;

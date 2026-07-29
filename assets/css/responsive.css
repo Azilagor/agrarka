@@ -169,7 +169,6 @@
     width: var(--sidebar-width-collapsed);
   }
 
-  .app-shell--collapsed .sidebar__brand-text,
   .app-shell--collapsed .sidebar__search,
   .app-shell--collapsed .lang-switch,
   .app-shell--collapsed .platonus-link__label,

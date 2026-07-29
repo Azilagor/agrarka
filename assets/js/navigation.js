@@ -1,14 +1,16 @@
 /*
   navigation.js
-  Builds the entire sidebar (brand, search, accordion nav, language
-  switch, Platonus link) once from data and injects it into every page's
-  empty `#sidebar-mount`. Also owns the mobile drawer (open/close/Escape/
-  overlay/scroll-lock) and the desktop collapse toggle.
+  Builds the sidebar (search, accordion nav, language switch, Platonus
+  link, drawer close/collapse controls) into every page's empty
+  `#sidebar-mount`, and the university brand lockup (logo + full name)
+  into the topbar's `#topbar-brand-mount`. Also owns the mobile drawer
+  (open/close/Escape/overlay/scroll-lock) and the desktop collapse toggle.
 
   Every page only needs:
     <aside class="sidebar" id="sidebar"><div id="sidebar-mount"></div></aside>
     <div class="app-shell__overlay" id="sidebarOverlay"></div>
     <button id="mobileMenuToggle" class="topbar__menu-btn" aria-controls="sidebar" aria-expanded="false">…</button>
+    <div id="topbar-brand-mount"></div>
   and sets `data-page="<key>"` on <body> to get the correct active link.
 */
 
@@ -249,19 +251,6 @@
     var header = document.createElement('div');
     header.className = 'sidebar__header';
 
-    var brand = document.createElement('a');
-    brand.className = 'sidebar__brand';
-    if (currentPageKey() === 'home') {
-      brand.classList.add('is-active');
-      brand.setAttribute('aria-current', 'page');
-    }
-    brand.href = 'index.html';
-    brand.innerHTML =
-      '<img class="sidebar__logo" src="assets/icons/logo.svg" alt="" width="40" height="40">' +
-      '<span class="sidebar__brand-text">' +
-      '<span class="sidebar__brand-name">Казахский агротехнический исследовательский университет имени С. Сейфуллина</span>' +
-      '</span>';
-
     var closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.className = 'sidebar__icon-btn sidebar__close-btn';
@@ -277,10 +266,31 @@
     collapseBtn.setAttribute('aria-label', 'Свернуть меню');
     collapseBtn.innerHTML = ICONS.collapse;
 
-    header.appendChild(brand);
     header.appendChild(closeBtn);
     header.appendChild(collapseBtn);
     return header;
+  }
+
+  function buildTopbarBrand() {
+    var mount = document.getElementById('topbar-brand-mount');
+    if (!mount) {
+      return;
+    }
+
+    var brand = document.createElement('a');
+    brand.className = 'topbar__brand';
+    if (currentPageKey() === 'home') {
+      brand.classList.add('is-active');
+      brand.setAttribute('aria-current', 'page');
+    }
+    brand.href = 'index.html';
+    brand.innerHTML =
+      '<img class="topbar__brand-logo" src="assets/icons/logo.svg" alt="" width="36" height="36">' +
+      '<span class="topbar__brand-text">' +
+      '<span class="topbar__brand-name">Казахский агротехнический исследовательский университет имени С. Сейфуллина</span>' +
+      '</span>';
+
+    mount.appendChild(brand);
   }
 
   function buildSearch() {
@@ -457,6 +467,7 @@
 
   function init() {
     buildSidebar();
+    buildTopbarBrand();
     initDrawer();
     initCollapse();
   }
