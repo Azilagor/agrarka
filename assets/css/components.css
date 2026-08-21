@@ -589,6 +589,207 @@
   font-weight: 700;
 }
 
+/* Homepage institute showcase */
+.institutes-showcase {
+  background: linear-gradient(180deg, #f4f8f4 0%, var(--color-canvas) 100%);
+}
+
+.institutes-showcase__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.institutes-showcase__intro {
+  max-width: 52ch;
+  margin: 0 0 var(--space-sm);
+  color: var(--color-ink-muted);
+}
+
+.institutes-showcase__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: var(--space-md) var(--space-lg);
+}
+
+.institute-filter {
+  min-height: 38px;
+  padding: 7px 14px;
+  border: 1px solid rgba(1, 69, 48, 0.22);
+  border-radius: var(--radius-pill);
+  background: var(--color-canvas);
+  color: var(--color-primary);
+  font: var(--text-caption);
+  font-weight: 700;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+}
+
+.institute-filter:hover,
+.institute-filter:focus-visible {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.institute-filter.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.institute-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.institute-showcase-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 286px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.institute-showcase-card:hover,
+.institute-showcase-card:focus-visible {
+  color: var(--color-on-primary);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.institute-showcase-card img,
+.institute-showcase-card__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.institute-showcase-card img {
+  object-fit: cover;
+  transition: transform 600ms ease;
+}
+
+.institute-showcase-card:hover img,
+.institute-showcase-card:focus-visible img {
+  transform: scale(1.07);
+}
+
+.institute-showcase-card__shade {
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 37, 26, 0.12) 0%, rgba(0, 52, 37, 0.92) 92%);
+}
+
+.institute-showcase-card__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: end;
+  padding: var(--space-lg);
+}
+
+.institute-showcase-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: auto;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  background: rgba(216, 159, 20, 0.86);
+  color: var(--color-primary);
+  transition: transform var(--transition-base), background var(--transition-base);
+}
+
+.institute-showcase-card__icon svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.institute-showcase-card:hover .institute-showcase-card__icon,
+.institute-showcase-card:focus-visible .institute-showcase-card__icon {
+  transform: rotate(-7deg) scale(1.08);
+  background: var(--color-accent-logo);
+}
+
+.institute-showcase-card__title {
+  font: var(--text-title);
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.institute-showcase-card__text {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.86);
+  font: var(--text-body-sm);
+}
+
+.institute-showcase-card__link {
+  margin-top: var(--space-md);
+  color: var(--color-accent-logo);
+  font: var(--text-caption);
+  font-weight: 700;
+}
+
+.institute-showcase-card.is-filtered-out {
+  display: none;
+}
+
+.institutes-showcase__all {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.institutes-showcase__all-kicker {
+  color: var(--color-accent-logo);
+  font: var(--text-caption);
+  font-weight: 700;
+}
+
+.institutes-showcase__all-text {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.82);
+  font: var(--text-body-sm);
+}
+
+.institutes-showcase__all-link {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.institutes-showcase__all-link span {
+  display: inline-block;
+  margin-left: 5px;
+  transition: transform var(--transition-base);
+}
+
+.institutes-showcase__all-link:hover span,
+.institutes-showcase__all-link:focus-visible span {
+  transform: translateX(4px);
+}
+
 /* Homepage polish: quieter surfaces, clearer section rhythm and purposeful hover states. */
 .home-page .section__heading {
   position: relative;

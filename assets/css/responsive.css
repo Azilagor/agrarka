@@ -73,6 +73,32 @@
     font-size: 13px;
     line-height: 1.25;
   }
+
+  .institutes-showcase__header {
+    display: block;
+  }
+
+  .institutes-showcase__intro {
+    margin-top: var(--space-sm);
+  }
+
+  .institute-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .institute-showcase-card {
+    min-height: 250px;
+  }
+
+  .institutes-showcase__all {
+    display: block;
+    padding: var(--space-md);
+  }
+
+  .institutes-showcase__all-link {
+    margin-top: var(--space-md);
+    width: 100%;
+  }
 }
 
 /* ---------------------------------------------------------------- */
@@ -90,6 +116,10 @@
 
   .institute-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .institute-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .filter-grid {
@@ -131,6 +161,10 @@
 @media (min-width: 960px) {
   .science-list {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .institute-showcase-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .science-item {
