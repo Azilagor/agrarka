@@ -21,6 +21,7 @@
       date: '2026-07-10',
       image: 'assets/images/news-1-forum-rektorov.jpg',
       excerpt: '5-й Форум ректоров сельскохозяйственных университетов стран ШОС и 11-я конференция Альянса сельскохозяйственного образования и научных инноваций Шёлкового пути, Сиань (Китай), 6–9 июля 2026 года.',
+      tags: ['agriculture', 'international'],
       href: null
     },
     {
@@ -30,6 +31,7 @@
       date: '2026-07-08',
       image: 'assets/images/news-2-diplom.jpg',
       excerpt: '',
+      tags: ['humanities'],
       href: null
     },
     {
@@ -39,6 +41,7 @@
       date: '2026-07-02',
       image: 'assets/images/news-3-konstitucia.jpg',
       excerpt: '',
+      tags: ['humanities'],
       href: null
     },
     {
@@ -48,6 +51,7 @@
       date: '2026-07-02',
       image: 'assets/images/news-4-istoriceskaa-galerea.jpg',
       excerpt: '',
+      tags: ['humanities'],
       href: null
     },
     {
@@ -57,7 +61,18 @@
       date: '2026-07-02',
       image: 'assets/images/news-5-erasmus-hwca.jpg',
       excerpt: '',
+      tags: ['land-architecture', 'agriculture', 'international'],
       href: null
+    },
+    {
+      id: 'china-agriculture-lab',
+      category: 'news',
+      title: 'Совместная лаборатория и новые исследования: встреча КАТИУ с партнёрами из КНР',
+      date: '2026-02-04',
+      image: null,
+      excerpt: 'Сотрудничество в области пастбищного сельского хозяйства и научных исследований.',
+      tags: ['agriculture', 'international'],
+      href: 'https://kazatu.edu.kz/ru/news/kazatzu-da-lan-czou-universitetini-khr-delegaciasymen-zmys-kezdesui-tti'
     },
     {
       id: 'grants-info',
@@ -307,8 +322,6 @@
       if (item.href) {
         paragraphs.push('<p>Полный текст объявления опубликован на официальном сайте университета.</p>');
         paragraphs.push('<p><a class="btn btn-outline" href="' + item.href + '" target="_blank" rel="noopener noreferrer">Читать на kazatu.edu.kz</a></p>');
-      } else {
-        paragraphs.push('<p class="badge badge--warning">TODO: полный текст материала — заголовок, дата, категория и фото подтверждены по официальному сайту, но развёрнутый текст статьи ещё не перенесён.</p>');
       }
       body.innerHTML = paragraphs.join('');
     }

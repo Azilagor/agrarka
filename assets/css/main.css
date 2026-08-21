@@ -13,6 +13,7 @@ body {
   font: var(--text-body);
   color: var(--color-ink);
   background: var(--color-canvas);
+  overflow-x: hidden;
 }
 
 h1,
@@ -103,6 +104,21 @@ b {
   flex: 1 1 auto;
 }
 
+/* Homepage editorial sequence: the most time-sensitive content follows programmes. */
+.home-page .app-shell__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page .breadcrumbs { order: 0; }
+.home-page .hero { order: 1; }
+.home-page section[aria-labelledby='levels-heading'] { order: 2; }
+.home-page section[aria-labelledby='news-heading'] { order: 3; }
+.home-page section[aria-labelledby='science-heading'] { order: 4; }
+.home-page section[aria-labelledby='intl-heading'] { order: 5; }
+.home-page section[aria-labelledby='institutes-heading'] { order: 6; }
+.home-page section[aria-labelledby='campus-heading'] { order: 7; }
+
 /* ---------------------------------------------------------------- */
 /* Containers                                                       */
 /* ---------------------------------------------------------------- */
@@ -129,10 +145,31 @@ b {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  min-height: var(--topbar-height);
+  min-height: 92px;
   padding-inline: var(--space-md);
   background: var(--color-canvas);
   border-bottom: 1px solid var(--color-border);
+}
+
+#topbar-brand-mount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* A deliberate, persistent readability mode for the topbar control. */
+body.is-accessible {
+  font-size: 112.5%;
+}
+
+body.is-accessible a:focus-visible,
+body.is-accessible button:focus-visible,
+body.is-accessible input:focus-visible {
+  outline: 3px solid var(--color-accent-logo);
+  outline-offset: 3px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -141,7 +178,8 @@ b {
 
 .page-header {
   padding-block: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(120deg, var(--color-primary) 0%, var(--color-primary-tonal) 72%, #17664b 100%);
+  color: var(--color-on-primary);
   margin-bottom: var(--space-lg);
 }
 
@@ -155,10 +193,11 @@ b {
 
 .page-header h1 {
   margin-bottom: var(--space-2xs);
+  color: var(--color-on-primary);
 }
 
 .page-header p {
-  color: var(--color-ink-muted);
+  color: rgba(255, 255, 255, 0.86);
   font: var(--text-subhead);
 }
 

@@ -1,7 +1,7 @@
 /*
   i18n.js
-  Stage-1 scaffold for KZ / RU / EN. Translates chrome strings only
-  (sidebar nav, search placeholder, footer headings, skip link) via
+  Stage-1 scaffold for KZ / RU / EN. Translates selected chrome strings
+  (search placeholder, footer headings, skip link) via
   [data-i18n] / [data-i18n-placeholder] attributes. Page article content
   is authored in Russian for now and is intentionally out of scope until
   the full content pass — see README note in the final summary.

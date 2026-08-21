@@ -1,10 +1,12 @@
 /*
   navigation.js
-  Builds the sidebar (search, accordion nav, language switch, Platonus
-  link, drawer close/collapse controls) into every page's empty
-  `#sidebar-mount`, and the university brand lockup (logo + full name)
-  into the topbar's `#topbar-brand-mount`. Also owns the mobile drawer
-  (open/close/Escape/overlay/scroll-lock) and the desktop collapse toggle.
+  Builds the sidebar into every page's empty `#sidebar-mount` as a
+  two-zone off-canvas drawer: a fixed-width rail (close button + social
+  links) and a scrollable panel (search, single-expand accordion nav,
+  Platonus link). Also builds the university brand
+  lockup (logo + full name) into the topbar's `#topbar-brand-mount`.
+  Owns the mobile drawer (open/close/Escape/overlay/scroll-lock) and the
+  desktop collapse toggle (rendered in the panel header on desktop).
 
   Every page only needs:
     <aside class="sidebar" id="sidebar"><div id="sidebar-mount"></div></aside>
@@ -44,8 +46,7 @@
       label: 'Институты',
       href: 'institutes.html',
       children: [
-        { label: 'Все институты', href: 'institutes.html' },
-        { label: 'Кафедры', href: 'institutes.html#departments' }
+        { label: 'Все институты', href: 'institutes.html' }
       ]
     },
     {
@@ -104,6 +105,33 @@
 
   window.KAZATU_NAV_ITEMS = NAV_ITEMS;
 
+  var SOCIAL_LINKS = [
+    {
+      label: 'YouTube',
+      href: 'https://youtube.com/channel/UCOXrTfFjnVtC5ZaBvjK6rYg',
+      icon:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10.5 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor" stroke="none"/></svg>'
+    },
+    {
+      label: 'Instagram',
+      href: 'https://www.instagram.com/kazatu.official/',
+      icon:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>'
+    },
+    {
+      label: 'Facebook',
+      href: 'https://www.facebook.com/kazatu.official',
+      icon:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14 8.5h-1.3a1.5 1.5 0 0 0-1.5 1.5v2h2.6l-.4 2.5h-2.2V21"/></svg>'
+    },
+    {
+      label: 'Telegram',
+      href: 'https://t.me/KazATIU',
+      icon:
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l6 2.2M21 4l-3.4 15L9 15m12-11L9 15m0 0-.7 4.8L12 16.6"/></svg>'
+    }
+  ];
+
   var ICONS = {
     close:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
@@ -112,7 +140,9 @@
     search:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>',
     chevron:
-      '<svg class="nav-list__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
+      '<svg class="nav-list__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>',
+    accessibility:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 9.5h14M12 7v13M8 21l4-6 4 6M7 10l5 3 5-3"/></svg>'
   };
 
   var NAV_ICONS = {
@@ -166,6 +196,8 @@
     var list = document.createElement('ul');
     list.className = 'nav-list';
 
+    var accordionEntries = [];
+
     NAV_ITEMS.forEach(function (item) {
       var li = document.createElement('li');
       li.className = 'nav-list__item';
@@ -189,7 +221,7 @@
       }
       link.innerHTML =
         '<span class="nav-list__icon" aria-hidden="true">' + NAV_ICONS[item.key] + '</span>' +
-        '<span class="nav-list__label" data-i18n="nav.' + item.key + '">' + item.label + '</span>';
+        '<span class="nav-list__label">' + item.label + '</span>';
       row.appendChild(link);
 
       var submenu;
@@ -231,9 +263,17 @@
 
         toggle.addEventListener('click', function () {
           var expanded = toggle.getAttribute('aria-expanded') === 'true';
+          accordionEntries.forEach(function (entry) {
+            if (entry.toggle !== toggle) {
+              entry.toggle.setAttribute('aria-expanded', 'false');
+              entry.submenu.hidden = true;
+            }
+          });
           toggle.setAttribute('aria-expanded', String(!expanded));
           submenu.hidden = expanded;
         });
+
+        accordionEntries.push({ toggle: toggle, submenu: submenu });
       }
 
       li.appendChild(row);
@@ -247,16 +287,43 @@
     return nav;
   }
 
-  function buildHeader() {
-    var header = document.createElement('div');
-    header.className = 'sidebar__header';
+  function buildRail() {
+    var rail = document.createElement('div');
+    rail.className = 'sidebar__rail';
 
     var closeBtn = document.createElement('button');
     closeBtn.type = 'button';
-    closeBtn.className = 'sidebar__icon-btn sidebar__close-btn';
+    closeBtn.className = 'sidebar__icon-btn sidebar__rail-close';
     closeBtn.id = 'sidebarCloseBtn';
     closeBtn.setAttribute('aria-label', 'Закрыть меню');
     closeBtn.innerHTML = ICONS.close;
+    rail.appendChild(closeBtn);
+
+    var social = document.createElement('ul');
+    social.className = 'sidebar__rail-social';
+    SOCIAL_LINKS.forEach(function (network) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = network.href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', network.label);
+      a.innerHTML = network.icon;
+      li.appendChild(a);
+      social.appendChild(li);
+    });
+    rail.appendChild(social);
+
+    return rail;
+  }
+
+  function buildPanelHeader() {
+    var header = document.createElement('div');
+    header.className = 'sidebar__panel-header';
+
+    var title = document.createElement('span');
+    title.className = 'sidebar__panel-title';
+    title.textContent = 'Меню';
 
     var collapseBtn = document.createElement('button');
     collapseBtn.type = 'button';
@@ -266,7 +333,7 @@
     collapseBtn.setAttribute('aria-label', 'Свернуть меню');
     collapseBtn.innerHTML = ICONS.collapse;
 
-    header.appendChild(closeBtn);
+    header.appendChild(title);
     header.appendChild(collapseBtn);
     return header;
   }
@@ -285,12 +352,23 @@
     }
     brand.href = 'index.html';
     brand.innerHTML =
-      '<img class="topbar__brand-logo" src="assets/icons/logo.svg" alt="" width="36" height="36">' +
+      '<img class="topbar__brand-logo" src="assets/icons/logo.svg" alt="" width="64" height="64">' +
       '<span class="topbar__brand-text">' +
       '<span class="topbar__brand-name">Казахский агротехнический исследовательский университет имени С. Сейфуллина</span>' +
       '</span>';
 
     mount.appendChild(brand);
+
+    var utilities = document.createElement('div');
+    utilities.className = 'topbar__utilities';
+    utilities.innerHTML =
+      '<div class="lang-switch lang-switch--topbar" role="group" aria-label="Выбор языка сайта">' +
+        '<button type="button" class="lang-switch__btn" data-lang="kz">KZ</button>' +
+        '<button type="button" class="lang-switch__btn" data-lang="ru">RU</button>' +
+        '<button type="button" class="lang-switch__btn" data-lang="en">EN</button>' +
+      '</div>' +
+      '<button type="button" class="topbar__accessibility" id="accessibilityToggle" aria-pressed="false" aria-label="Версия для слабовидящих">' + ICONS.accessibility + '<span class="topbar__accessibility-label">Слабовидящим</span></button>';
+    mount.appendChild(utilities);
   }
 
   function buildSearch() {
@@ -311,15 +389,6 @@
     var wrap = document.createElement('div');
     wrap.className = 'sidebar__footer';
 
-    var langSwitch = document.createElement('div');
-    langSwitch.className = 'lang-switch';
-    langSwitch.setAttribute('role', 'group');
-    langSwitch.setAttribute('aria-label', 'Выбор языка сайта');
-    langSwitch.innerHTML =
-      '<button type="button" class="lang-switch__btn" data-lang="kz">KZ</button>' +
-      '<button type="button" class="lang-switch__btn" data-lang="ru">RU</button>' +
-      '<button type="button" class="lang-switch__btn" data-lang="en">EN</button>';
-
     var platonus = document.createElement('a');
     platonus.className = 'platonus-link';
     platonus.href = 'http://platonus.kazatu.kz/';
@@ -330,7 +399,6 @@
       '<span class="platonus-link__label">Platonus (АИС)</span>' +
       '<span class="visually-hidden">открывается в новой вкладке</span>';
 
-    wrap.appendChild(langSwitch);
     wrap.appendChild(platonus);
     return wrap;
   }
@@ -340,13 +408,18 @@
     if (!mount) {
       return;
     }
+    mount.className = 'sidebar__body';
     var pageKey = currentPageKey();
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(buildHeader());
-    fragment.appendChild(buildSearch());
-    fragment.appendChild(buildNavList(pageKey));
-    fragment.appendChild(buildFooter());
-    mount.appendChild(fragment);
+
+    var panel = document.createElement('div');
+    panel.className = 'sidebar__panel';
+    panel.appendChild(buildPanelHeader());
+    panel.appendChild(buildSearch());
+    panel.appendChild(buildNavList(pageKey));
+    panel.appendChild(buildFooter());
+
+    mount.appendChild(buildRail());
+    mount.appendChild(panel);
   }
 
   /* ---------------------------------------------------------------- */
@@ -465,11 +538,28 @@
     });
   }
 
+  function initAccessibilityToggle() {
+    var toggle = document.getElementById('accessibilityToggle');
+    if (!toggle) {
+      return;
+    }
+    var enabled = window.localStorage.getItem('kazatu.accessibility') === 'true';
+    document.body.classList.toggle('is-accessible', enabled);
+    toggle.setAttribute('aria-pressed', String(enabled));
+    toggle.addEventListener('click', function () {
+      enabled = !enabled;
+      document.body.classList.toggle('is-accessible', enabled);
+      toggle.setAttribute('aria-pressed', String(enabled));
+      window.localStorage.setItem('kazatu.accessibility', String(enabled));
+    });
+  }
+
   function init() {
     buildSidebar();
     buildTopbarBrand();
     initDrawer();
     initCollapse();
+    initAccessibilityToggle();
   }
 
   if (document.readyState === 'loading') {

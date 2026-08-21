@@ -3,7 +3,7 @@
   Data + filtering UX for programs.html (search, level, institute, language,
   field/direction, results count, reset) and the detail lookup for
   program.html. PLACEHOLDER_PROGRAMS is a sample catalog covering all seven
-  real KazATU institutes — TODO: replace with the official program catalog
+  real KazATU institutes.
   once it is provided (see README.md). Discipline/career text is composed
   generically per field of study and explicitly labeled as illustrative.
 */

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Институт — КазАТУ</title>
-  <meta name="description" content="Страница института КазАТУ: направление подготовки, руководство, образовательные программы, кафедры, преподаватели и контакты.">
+  <meta name="description" content="Страница института КазАТУ: направления подготовки, образовательные программы, преподаватели, новости и контакты.">
   <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,26 +50,35 @@
       </header>
 
       <main id="main-content" class="app-shell__content">
-        <nav class="breadcrumbs" aria-label="Хлебные крошки">
-          <ol>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="institutes.html">Институты</a></li>
-            <li aria-current="page" data-field="name">Институт</li>
-          </ol>
-        </nav>
        <div id="instituteDetail">
-        <header class="page-header">
+        <header class="institute-detail-hero">
           <div class="container">
-            <span class="page-header__eyebrow" data-field="short">Институт</span>
-            <h1 data-field="name">Название института</h1>
-            <p data-field="focus">Направления института</p>
+            <nav class="breadcrumbs breadcrumbs--institute" aria-label="Хлебные крошки">
+              <ol>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="institutes.html">Институты</a></li>
+                <li aria-current="page" data-field="name">Институт</li>
+              </ol>
+            </nav>
+            <div class="institute-detail-hero__grid">
+              <div>
+                <span class="institute-detail-hero__icon" data-field="icon" aria-hidden="true"></span>
+                <h1 data-field="name">Название института</h1>
+                <p data-field="focus">Направления института</p>
+                <p class="institute-detail-hero__actions"><a class="btn btn-accent" href="admissions.html">Поступить в КазАТУ</a> <a class="btn btn-outline" href="institutes.html">Все институты</a></p>
+              </div>
+              <nav class="institute-detail-hero__links" aria-label="Разделы института">
+                <a href="#programs">Образовательные программы</a>
+                <a href="#management">Об институте</a>
+                <a href="#institute-contacts">Контакты</a>
+              </nav>
+            </div>
           </div>
         </header>
 
         <section class="section" id="management">
           <div class="container">
             <h2 class="section__heading">Руководство</h2>
-            <p class="badge badge--warning">TODO: ФИО и должности руководства института — будут опубликованы после получения официальных данных.</p>
           </div>
         </section>
 
@@ -81,33 +90,36 @@
           </div>
         </section>
 
-        <section class="section" id="departments">
-          <div class="container">
-            <h2 class="section__heading">Кафедры</h2>
-            <p class="badge badge--warning">TODO: список кафедр института — будет опубликован после получения официальных данных.</p>
-          </div>
-        </section>
-
-        <section class="section section--surface" id="teachers">
+        <section class="section" id="teachers">
           <div class="container">
             <h2 class="section__heading">Преподаватели</h2>
-            <p class="badge badge--warning">TODO: состав профессорско-преподавательского состава — будет опубликован после получения официальных данных.</p>
+            <p class="text-muted" style="margin-top: -12px; margin-bottom: 24px;">Пример оформления карточек команды. Данные заменяются после публикации официального состава института.</p>
+            <div class="teacher-grid" aria-label="Преподаватели института">
+              <article class="teacher-card"><span class="teacher-card__avatar" aria-hidden="true">АЕ</span><p class="teacher-card__role">Профессор</p><h3 class="teacher-card__name">Айгүл Ермекова</h3><p class="teacher-card__subject">Исследовательские проекты и образовательные программы</p></article>
+              <article class="teacher-card"><span class="teacher-card__avatar" aria-hidden="true">НК</span><p class="teacher-card__role">Ассоциированный профессор</p><h3 class="teacher-card__name">Нурлан Касымов</h3><p class="teacher-card__subject">Практико-ориентированное обучение и наставничество</p></article>
+              <article class="teacher-card"><span class="teacher-card__avatar" aria-hidden="true">МС</span><p class="teacher-card__role">Старший преподаватель</p><h3 class="teacher-card__name">Мадина Серикова</h3><p class="teacher-card__subject">Современные технологии в профессиональной подготовке</p></article>
+            </div>
           </div>
         </section>
 
-        <section class="section" id="institute-news">
+        <section class="section section--surface" id="institute-news">
           <div class="container">
             <h2 class="section__heading">Новости института</h2>
-            <p class="text-muted">Отдельная лента новостей института не публиковалась в источниках, использованных при разработке макета. Актуальные новости университета — в разделе <a href="news.html">«Новости»</a>.</p>
+            <p class="text-muted" id="instituteNewsIntro" style="margin-top: -12px; margin-bottom: 24px;"></p>
+            <div class="card-grid institute-news-grid" id="instituteNewsList"></div>
+            <p style="margin-top: 20px;"><a class="btn btn-outline" href="news.html">Все новости университета</a></p>
           </div>
         </section>
 
-        <section class="section section--surface" id="institute-contacts">
+        <section class="section" id="institute-contacts">
           <div class="container">
             <h2 class="section__heading">Контакты</h2>
-            <p>Общие контакты университета: <a href="tel:+77172317547">+7 (7172) 31-75-47</a>, <a href="mailto:office@kazatu.edu.kz">office@kazatu.edu.kz</a></p>
-            <p class="badge badge--warning" style="margin-top: 12px;">TODO: прямые контакты деканата института — будут добавлены после получения официальных данных.</p>
-            <p style="margin-top: 16px;"><a class="btn btn-outline" href="institutes.html">← Ко всем институтам</a></p>
+            <p class="text-muted" style="margin-top: -12px; margin-bottom: 24px;">Для обращения в университет выберите удобный канал связи.</p>
+            <div class="contact-card-grid">
+              <article class="contact-card"><span class="contact-card__icon" aria-hidden="true">✉</span><h3>E-mail</h3><a href="mailto:office@kazatu.edu.kz">office@kazatu.edu.kz</a><p>Общие вопросы по работе университета.</p></article>
+              <article class="contact-card"><span class="contact-card__icon" aria-hidden="true">☎</span><h3>Приёмная ректора</h3><a href="tel:+77172317547">+7 (7172) 31-75-47</a><p>Основной телефон университета.</p></article>
+              <article class="contact-card"><span class="contact-card__icon" aria-hidden="true">⌂</span><h3>Адрес</h3><a href="https://www.google.com/maps/search/?api=1&amp;query=%D0%9F%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%96%D0%B5%D0%BD%D0%B8%D1%81%2062%2C%20%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0" target="_blank" rel="noopener noreferrer">г. Астана, пр. Женис, 62</a><p>010011, Республика Казахстан.</p></article>
+            </div>
           </div>
         </section>
        </div>
@@ -120,6 +132,7 @@
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/programs.js"></script>
+  <script src="assets/js/news.js"></script>
   <script src="assets/js/institutes.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/main.js"></script>

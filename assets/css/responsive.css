@@ -11,6 +11,10 @@
 /* ---------------------------------------------------------------- */
 
 @media (max-width: 599px) {
+  :root {
+    --topbar-height: 72px;
+  }
+
   h1 {
     font-size: 26px;
   }
@@ -34,6 +38,10 @@
   .hero--photo .quick-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-xs);
+  }
+
+  .hero__media img {
+    animation: none;
   }
 
   .hero__quick-actions {
@@ -156,21 +164,43 @@
   }
 
   .topbar__menu-btn,
-  .sidebar__close-btn {
+  .sidebar__rail {
     display: none;
   }
 
-  .sidebar__collapse-btn {
-    display: inline-flex;
+  .sidebar__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
   }
 
-  /* Collapsed rail state, toggled by navigation.js */
+  .sidebar__panel-header::after {
+    content: '';
+    position: absolute;
+    right: var(--space-sm);
+    bottom: -1px;
+    left: var(--space-sm);
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  .sidebar__panel-title {
+    color: var(--color-primary);
+    font: var(--text-title);
+    font-weight: 700;
+  }
+
+  /* Collapsed icon-only state, toggled by navigation.js */
   .app-shell--collapsed .sidebar {
     width: var(--sidebar-width-collapsed);
   }
 
   .app-shell--collapsed .sidebar__search,
-  .app-shell--collapsed .lang-switch,
   .app-shell--collapsed .platonus-link__label,
   .app-shell--collapsed .nav-list__label,
   .app-shell--collapsed .nav-list__toggle,
@@ -186,8 +216,12 @@
     border: 0;
   }
 
-  .app-shell--collapsed .sidebar__header {
+  .app-shell--collapsed .sidebar__panel-header {
     justify-content: center;
+  }
+
+  .app-shell--collapsed .sidebar__panel-title {
+    display: none;
   }
 
   .app-shell--collapsed .nav-list__row {
@@ -209,6 +243,66 @@
 
   .home-news__layout {
     grid-template-columns: minmax(0, 2fr) minmax(280px, 0.9fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .topbar {
+    min-height: 72px;
+    padding-inline: var(--space-2xs);
+    gap: var(--space-2xs);
+  }
+
+  #topbar-brand-mount {
+    gap: var(--space-2xs);
+  }
+
+  .topbar__brand {
+    gap: 6px;
+    padding: 0;
+  }
+
+  .topbar__brand-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .topbar__brand-name {
+    font-size: 12px;
+  }
+
+  .topbar__utilities {
+    gap: 4px;
+  }
+
+  .lang-switch--topbar .lang-switch__btn {
+    min-width: 30px;
+    min-height: 32px;
+    padding-inline: 4px;
+    font-size: 10px;
+  }
+
+  .topbar__accessibility {
+    min-height: 32px;
+    padding: 6px;
+  }
+
+  .topbar__accessibility-label {
+    display: none;
+  }
+
+  .institute-list--featured {
+    grid-template-columns: 1fr;
+  }
+
+  .institute-detail-hero__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .institute-directory__card {
+    min-height: 0;
+    padding: var(--space-md);
   }
 }
 
